@@ -64,7 +64,7 @@ export default () => {
         <button style={{
             "float":"right",
             "margin":"0"
-        }} onclick={generateKeyPair}>Generate New Keypair</button></h2>
+        }} onclick={generateKeyPair}>Generate</button></h2>
         <div class="generate-config">
 
             <div>
