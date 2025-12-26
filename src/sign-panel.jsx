@@ -14,12 +14,19 @@ export default () => {
     try {
       setStatus("Signing text...");
 
-      const privateKey = await openpgp.decryptKey({
-        privateKey: await openpgp.readPrivateKey({
+      let privateKey;
+      if (passphrase() !== "") {
+        privateKey = await openpgp.decryptKey({
+          privateKey: await openpgp.readPrivateKey({
+            armoredKey: privateKeyText(),
+          }),
+          passphrase: passphrase(),
+        });
+      } else {
+        privateKey = await openpgp.readPrivateKey({
           armoredKey: privateKeyText(),
-        }),
-        passphrase: passphrase(),
-      });
+        });
+      }
 
       const message = await openpgp.createCleartextMessage({
         text: plainText(),
@@ -33,8 +40,7 @@ export default () => {
       setSignedText(signed);
       setStatus("Text signed successfully 🎉");
     } catch (err) {
-      console.error(err);
-      setStatus("❌ Failed to sign text");
+      setStatus("❌ Failed to sign text" + JSON.stringify({ name: err.name, message: err.message }));
     }
   };
 
@@ -46,12 +52,19 @@ export default () => {
 
       setStatus("Signing file...");
 
-      const privateKey = await openpgp.decryptKey({
-        privateKey: await openpgp.readPrivateKey({
+      let privateKey;
+      if (passphrase() !== "") {
+        privateKey = await openpgp.decryptKey({
+          privateKey: await openpgp.readPrivateKey({
+            armoredKey: privateKeyText(),
+          }),
+          passphrase: passphrase(),
+        });
+      } else {
+        privateKey = await openpgp.readPrivateKey({
           armoredKey: privateKeyText(),
-        }),
-        passphrase: passphrase(),
-      });
+        });
+      }
 
       const buffer = new Uint8Array(await file.arrayBuffer());
 
@@ -77,8 +90,7 @@ export default () => {
 
       setStatus("File signed successfully 🎉");
     } catch (err) {
-      console.error(err);
-      setStatus("❌ Failed to sign file");
+      setStatus("❌ Failed to sign file" + JSON.stringify({ name: err.name, message: err.message }));
     }
   };
 

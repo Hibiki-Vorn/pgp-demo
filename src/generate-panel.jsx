@@ -34,8 +34,7 @@ export default () => {
 
             setStatus("Keypair generated 🎉")
         } catch (err) {
-            console.error(err)
-            setStatus("❌ Failed to generate keypair")
+            setStatus("❌ Failed to generate keypair"+JSON.stringify({name: err.name, message: err.message}))
         }
     }
 

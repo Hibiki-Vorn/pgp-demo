@@ -29,8 +29,7 @@ export default () => {
       setEncryptedText(encrypted);
       setStatus("Text encrypted successfully 🎉");
     } catch (err) {
-      console.error(err);
-      setStatus("❌ Failed to encrypt text");
+      setStatus("❌ Failed to encrypt text"+JSON.stringify({name: err.name, message: err.message}));
     }
   };
 
@@ -72,8 +71,7 @@ export default () => {
 
       setStatus("File encrypted successfully 🎉");
     } catch (err) {
-      console.error(err);
-      setStatus("❌ Failed to encrypt file");
+      setStatus("❌ Failed to encrypt file"+JSON.stringify({name: err.name, message: err.message}));
     }
   };
 

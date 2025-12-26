@@ -13,12 +13,19 @@ export default () => {
   const decryptText = async () => {
     try {
       setStatus("Decrypting text...");
-      const privateKey = await openpgp.decryptKey({
-        privateKey: await openpgp.readPrivateKey({
+      let privateKey;
+      if (passphrase() !== "") {
+        privateKey = await openpgp.decryptKey({
+          privateKey: await openpgp.readPrivateKey({
+            armoredKey: privateKeyText(),
+          }),
+          passphrase: passphrase(),
+        });
+      } else {
+        privateKey = await openpgp.readPrivateKey({
           armoredKey: privateKeyText(),
-        }),
-        passphrase: passphrase(),
-      });
+        });
+      }
 
       const message = await openpgp.readMessage({
         armoredMessage: cipherText(),
@@ -32,8 +39,7 @@ export default () => {
       setPlainText(data);
       setStatus("Text decrypted successfully 🎉");
     } catch (err) {
-      console.error(err);
-      setStatus("❌ Failed to decrypt text");
+      setStatus("❌ Failed to decrypt text."+JSON.stringify({name: err.name, message: err.message}));
     }
   };
 
@@ -47,12 +53,19 @@ export default () => {
       const arrayBuffer = await file.arrayBuffer();
       const encryptedBytes = new Uint8Array(arrayBuffer);
 
-      const privateKey = await openpgp.decryptKey({
-        privateKey: await openpgp.readPrivateKey({
+      let privateKey;
+      if (passphrase() !== "") {
+        privateKey = await openpgp.decryptKey({
+          privateKey: await openpgp.readPrivateKey({
+            armoredKey: privateKeyText(),
+          }),
+          passphrase: passphrase(),
+        });
+      } else {
+        privateKey = await openpgp.readPrivateKey({
           armoredKey: privateKeyText(),
-        }),
-        passphrase: passphrase(),
-      });
+        });
+      }
 
       const message = await openpgp.readMessage({
         binaryMessage: encryptedBytes,
@@ -76,8 +89,7 @@ export default () => {
 
       setStatus("File decrypted successfully 🎉");
     } catch (err) {
-      console.error(err);
-      setStatus("❌ Failed to decrypt file");
+      setStatus("❌ Failed to decrypt file."+JSON.stringify({name: err.name, message: err.message}));
     }
   };
 

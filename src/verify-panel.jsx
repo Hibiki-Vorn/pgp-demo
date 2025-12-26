@@ -32,8 +32,7 @@ export default () => {
       setVerifiedText(result.data);
       setStatus("Signature valid 🎉");
     } catch (err) {
-      console.error(err);
-      setStatus("❌ Signature invalid");
+      setStatus("❌ Signature invalid"+JSON.stringify({name: err.name, message: err.message}));
     }
   };
 
@@ -68,8 +67,7 @@ export default () => {
 
       setStatus("File signature valid 🎉");
     } catch (err) {
-      console.error(err);
-      setStatus("❌ File signature invalid");
+      setStatus("❌ File signature invalid"+JSON.stringify({name: err.name, message: err.message}));
     }
   };
 
