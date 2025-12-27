@@ -133,6 +133,7 @@ export default () => {
 
           <button
             class="secondary"
+            hidden={window.telegram !== null}
             onclick={() => navigator.clipboard.writeText(signedText())}
           >
             Copy Signed Text

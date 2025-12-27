@@ -107,6 +107,7 @@ export default () => {
 
           <button
             class="secondary"
+            hidden={window.telegram !== null}
             onclick={() =>
               window.navigator.clipboard.writeText(encryptedText())
             }

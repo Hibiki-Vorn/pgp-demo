@@ -121,7 +121,7 @@ export default () => {
                     readonly
                     placeholder="Generated public key will appear here..."
                 />
-                <button class="secondary" onclick={() => { window.navigator.clipboard.writeText(pubKey()) }}>Copy Public Key</button>
+                <button class="secondary" hidden={window.telegram !== null} onclick={() => { window.navigator.clipboard.writeText(pubKey()) }}>Copy Public Key</button>
                 <button class="secondary" onclick={downloadPublicKey}>Download Public Key</button>
             </div>
 
@@ -133,7 +133,7 @@ export default () => {
                     readonly
                     placeholder="Generated private key will appear here..."
                 />
-                <button class="secondary" onclick={() => { window.navigator.clipboard.writeText(privKey()) }}>Copy Private Key</button>
+                <button class="secondary" hidden={window.telegram !== null} onclick={() => { window.navigator.clipboard.writeText(privKey()) }}>Copy Private Key</button>
                 <button class="secondary" onclick={downloadPrivateKey}>Download Private Key</button>
             </div>
         </div>

@@ -124,6 +124,7 @@ export default () => {
           <textarea readonly value={plainText()} placeholder="Decrypted result..." />
           <button
             class="secondary"
+            hidden={window.telegram !== null}
             onclick={() => window.navigator.clipboard.writeText(plainText())}
           >
             Copy Decrypted Text
