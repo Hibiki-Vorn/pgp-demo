@@ -1,5 +1,6 @@
 import * as openpgp from "openpgp";
 import { createSignal } from "solid-js";
+import UploadKey from "./Upload-key";
 
 export default () => {
   const [publicKeyText, setPublicKeyText] = createSignal("");
@@ -73,9 +74,12 @@ export default () => {
 
   return (
     <div class="card">
-      <h2>5. Verify Signature</h2>
+      <h2>5. Verify Signature (require public key)</h2>
 
-      <label>Public Key</label>
+      <label>
+        <div>Enter recipient public key or</div>
+        <UploadKey callback={setPublicKeyText} />
+      </label>
       <textarea
         value={publicKeyText()}
         onInput={(e) => setPublicKeyText(e.currentTarget.value)}

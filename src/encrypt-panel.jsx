@@ -1,5 +1,6 @@
 import * as openpgp from "openpgp";
 import { createSignal } from "solid-js";
+import UploadKey from "./Upload-key";
 
 export default () => {
   const [encryptKey, setEncryptKey] = createSignal("");
@@ -79,7 +80,11 @@ export default () => {
     <div class="card">
       <h2>2. Encrypt (require public key)</h2>
 
-      <label>Enter recipient public key:</label>
+      <label>
+        <div>Enter recipient public key or</div>
+        <UploadKey callback={setEncryptKey} />
+      </label>
+      
       <textarea
         value={encryptKey()}
         onInput={(e) => setEncryptKey(e.currentTarget.value)}
@@ -107,7 +112,7 @@ export default () => {
 
           <button
             class="secondary"
-            hidden={window.telegram !== null}
+            hidden={window.telegram != null}
             onclick={() =>
               window.navigator.clipboard.writeText(encryptedText())
             }

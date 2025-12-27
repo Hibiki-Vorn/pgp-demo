@@ -4,6 +4,16 @@
     --text: #1e293b;
 }
 
+* {
+    scrollbar-width: 2px;
+    scrollbar-color: #0f172a;
+}
+*::-webkit-scrollbar {
+  display: block;
+  width: 2px;
+  color: #0f172a;
+}
+
 body {
     font-family: system-ui, -apple-system, sans-serif;
     background: var(--bg);
@@ -26,8 +36,7 @@ h2 {
 }
 
 .switchmode-buttons {
-    display: grid;
-    grid-template-columns: 100px auto auto auto auto auto ;
+    white-space: nowrap;
     vertical-align: middle;
     overflow-x: scroll;
     height: 60px;
@@ -79,10 +88,15 @@ button.secondary {
 }
 
 label {
-    display: block;
     font-weight: bold;
     margin-bottom: 5px;
     margin-top: 15px;
+    display: block;
+}
+
+label > div {
+    display: inline-block;
+    margin-right: 0.5rem;
 }
 
 textarea {

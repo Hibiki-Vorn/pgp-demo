@@ -23,7 +23,7 @@ function App() {
         <button onClick={() => {setPannel(3)}}>Sign</button>
         <button onClick={() => {setPannel(4)}}>Verify</button>
       </div>
-      <p class="info">This tool uses the browser's native Web Crypto API. Runs entirely locally, supporting RSA-2048-OAEP + AES-256-GCM hybrid encryption.</p>
+      <p class="info">This tool never tracks your data or sends it anywhere.</p>
       {pannelList[pannel()]}
     </div>
   )

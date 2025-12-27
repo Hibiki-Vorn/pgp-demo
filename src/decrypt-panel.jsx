@@ -1,5 +1,6 @@
 import * as openpgp from "openpgp";
 import { createSignal } from "solid-js";
+import UploadKey from "./Upload-key";
 
 export default () => {
   const [privateKeyText, setPrivateKeyText] = createSignal("");
@@ -39,7 +40,7 @@ export default () => {
       setPlainText(data);
       setStatus("Text decrypted successfully 🎉");
     } catch (err) {
-      setStatus("❌ Failed to decrypt text."+JSON.stringify({name: err.name, message: err.message}));
+      setStatus("❌ Failed to decrypt text." + JSON.stringify({ name: err.name, message: err.message }));
     }
   };
 
@@ -89,7 +90,7 @@ export default () => {
 
       setStatus("File decrypted successfully 🎉");
     } catch (err) {
-      setStatus("❌ Failed to decrypt file."+JSON.stringify({name: err.name, message: err.message}));
+      setStatus("❌ Failed to decrypt file." + JSON.stringify({ name: err.name, message: err.message }));
     }
   };
 
@@ -97,7 +98,10 @@ export default () => {
     <div class="card">
       <h2>3. Decrypt (require private key)</h2>
 
-      <label>Enter your private key:</label>
+      <label>
+        <div>Enter recipient private key or</div>
+        <UploadKey callback={setPrivateKeyText} />
+      </label>
       <textarea
         value={privateKeyText()}
         onInput={(e) => setPrivateKeyText(e.currentTarget.value)}
@@ -124,7 +128,7 @@ export default () => {
           <textarea readonly value={plainText()} placeholder="Decrypted result..." />
           <button
             class="secondary"
-            hidden={window.telegram !== null}
+            hidden={window.telegram != null}
             onclick={() => window.navigator.clipboard.writeText(plainText())}
           >
             Copy Decrypted Text
