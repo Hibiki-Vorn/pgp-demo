@@ -1,6 +1,7 @@
 import * as openpgp from "openpgp";
 import { createSignal } from "solid-js";
 import UploadKey from "./Upload-key";
+import copy from './copy';
 
 export default () => {
   const [privateKeyText, setPrivateKeyText] = createSignal("");
@@ -129,7 +130,7 @@ export default () => {
           <button
             class="secondary"
             hidden={window.telegram != null}
-            onclick={() => window.navigator.clipboard.writeText(plainText())}
+            onclick={() => copy(plainText())}
           >
             Copy Decrypted Text
           </button>

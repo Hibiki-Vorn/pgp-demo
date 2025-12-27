@@ -4,10 +4,6 @@
     --text: #1e293b;
 }
 
-* {
-    scrollbar-width: 2px;
-    scrollbar-color: #0f172a;
-}
 *::-webkit-scrollbar {
   display: block;
   width: 2px;
@@ -154,4 +150,23 @@ button.secondary {
 .info {
     font-size: 0.85em;
     color: #64748b;
+}
+
+select {
+    padding: 10px 16px;
+    border: none;
+    border-radius: 8px;
+    background-color: #f0f0f5;
+    font-size: 15px;
+    color: #333;
+    cursor: pointer;
+    appearance: none; /* 去掉默认下拉箭头，自己可以加图标 */
+    background-image: url("data:image/svg+xml,%3Csvg fill='none' stroke='%23333' stroke-width='2' viewBox='0 0 24 24' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M6 9l6 6 6-6'%3E%3C/path%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 10px center;
+    background-size: 16px 16px;
+    width: 180px;
+    padding-right: 2rem;
+    text-overflow: ellipsis;
+    overflow-x: hidden;
 }

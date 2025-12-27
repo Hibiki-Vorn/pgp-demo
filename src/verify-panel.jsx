@@ -100,6 +100,7 @@ export default () => {
           <button onclick={verifyText}>Verify Text Signature</button>
 
           <textarea
+            hidden={true}
             readonly
             value={verifiedText()}
             placeholder="Verified plain text output..."
